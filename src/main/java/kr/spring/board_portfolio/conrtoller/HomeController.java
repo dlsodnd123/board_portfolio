@@ -2,6 +2,8 @@ package kr.spring.board_portfolio.conrtoller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -85,5 +87,13 @@ public class HomeController {
 		String result = memberService.idPwCheck(member);
 		map.put("result", result);
 		return map;
+	}
+	// 로그아웃 기능 구현
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public ModelAndView logoutGet(ModelAndView mv, HttpServletRequest request) {
+		request.getSession().removeAttribute("member");
+		
+		mv.setViewName("redirect:/");
+		return mv;
 	}
 }
