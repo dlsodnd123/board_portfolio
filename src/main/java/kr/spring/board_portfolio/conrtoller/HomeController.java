@@ -1,7 +1,10 @@
 package kr.spring.board_portfolio.conrtoller;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -57,5 +60,30 @@ public class HomeController {
 			return "possible";
 		}
 		return "impossible";
+	}
+	// 로그인 페이지 담당
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView loginGet(ModelAndView mv) {
+		
+		mv.setViewName("/main/login");
+		return mv;
+	}
+	// 로그인 기능 담당
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ModelAndView loginPost(ModelAndView mv, String mb_id, String mb_pw) {
+		
+		MemberVo member = memberService.getMemberId(mb_id);
+		mv.addObject("member", member);
+		mv.setViewName("redirect:/");
+		return mv;
+	}
+	// 로그인 시 아이디 비밀번호 체크 담당
+	@RequestMapping(value = "/idPw/check", method = RequestMethod.POST)
+	@ResponseBody
+	public Object idPwCheckPost(@RequestBody MemberVo member) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String result = memberService.idPwCheck(member);
+		map.put("result", result);
+		return map;
 	}
 }

@@ -16,5 +16,9 @@
   	insert into member(mb_id, mb_nickname, mb_pw, mb_email, mb_division)
   		values(#{member.mb_id}, #{member.mb_nickname}, #{member.mb_pw}, #{member.mb_email}, #{member.mb_division})
   </insert>
+  
+  <select id="selectMemberId" resultType="kr.spring.board_portfolio.vo.MemberVo">
+  	select * from member where mb_id = #{mb_id}
+  </select>
 </mapper>
 

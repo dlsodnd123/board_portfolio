@@ -10,4 +10,8 @@ public interface MemberService {
 
 	void signup(MemberVo member);
 
+	String idPwCheck(MemberVo member);
+
+	MemberVo getMemberId(String mb_id);
+
 }

@@ -36,4 +36,21 @@ public class MemberServiceImp implements MemberService {
 		memberDao.insertMember(member);
 	}
 
+	// 로그인시 아이디 비밀번호 체크 하기
+	@Override
+	public String idPwCheck(MemberVo member) {
+		MemberVo oriMember = memberDao.selectMemberId(member.getMb_id());
+		if(oriMember == null)
+			return "notId";
+		else if(!passwordEncoder.matches(member.getMb_pw(), oriMember.getMb_pw()))
+			return "notSamePw";
+		return "Same";
+	}
+
+	// 아이디로 회원 정보 가져오기
+	@Override
+	public MemberVo getMemberId(String mb_id) {
+		return memberDao.selectMemberId(mb_id);
+	}
+
 }
