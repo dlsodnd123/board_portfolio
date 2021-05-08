@@ -50,8 +50,19 @@
 	    	</tbody>
 	  	</table>
 	  	<div class="boardList-btn-box">
-	  		<a href="#"><button type="button" class="btn btn-info writing-btn">글쓰기</button></a>
+	  		<a href="<%=request.getContextPath()%>/board/register"><button type="button" class="btn btn-info writing-btn">글쓰기</button></a>
 	  	</div>
 	</div>
 </body>
+<script type="text/javascript">
+	$('.writing-btn').click(function(){
+		if("${member}" == ''){
+			var isLogin = confirm('로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?');
+			if(isLogin){
+				location.href = '<%=request.getContextPath()%>/login'
+			}
+			return false;			
+		}
+	})
+</script>
 </html>
