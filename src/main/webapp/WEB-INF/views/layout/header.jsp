@@ -25,7 +25,7 @@
 		        	<a class="nav-link" href="<%=request.getContextPath()%>/">메인홈으로</a>
 		      	</li> 
 		      	<li class="nav-item">
-		        	<a class="nav-link" href="#">게시판으로</a>
+		        	<a class="nav-link" href="<%=request.getContextPath()%>/board/list">게시판으로</a>
 		      	</li>     
 	    	</ul>
 		</div> 
