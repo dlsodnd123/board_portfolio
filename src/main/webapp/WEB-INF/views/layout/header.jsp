@@ -6,15 +6,21 @@
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
 		<div class="container">
 	    	<ul class="navbar-nav">
-		      	<li class="nav-item">
-		        	<a class="nav-link" href="<%=request.getContextPath()%>/login">로그인</a>
-		      	</li>
-		      	<li class="nav-item">
-		        	<a class="nav-link" href="#">로그아웃</a>
-		      	</li>
-		      	<li class="nav-item">
-		        	<a class="nav-link" href="<%=request.getContextPath()%>/signup">회원가입</a>
-		      	</li>
+	    		<c:if test="${member == null}">
+			      	<li class="nav-item">
+			        	<a class="nav-link" href="<%=request.getContextPath()%>/login">로그인</a>
+			      	</li>
+		      	</c:if>
+		      	<c:if test="${member != null}">
+			      	<li class="nav-item">
+			        	<a class="nav-link" href="<%=request.getContextPath()%>/logout">로그아웃</a>
+			      	</li>
+		      	</c:if>
+		      	<c:if test="${member == null}">
+			      	<li class="nav-item">
+			        	<a class="nav-link" href="<%=request.getContextPath()%>/signup">회원가입</a>
+			      	</li>
+		      	</c:if>
 		      	<li class="nav-item">
 		        	<a class="nav-link" href="<%=request.getContextPath()%>/">메인홈으로</a>
 		      	</li> 
