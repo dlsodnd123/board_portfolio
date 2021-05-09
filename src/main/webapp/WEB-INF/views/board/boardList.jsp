@@ -40,13 +40,15 @@
 	      		</tr>
 	    	</thead>
 	    	<tbody>
-	      		<tr>
-			        <td>1</td>
-			        <td><a href="#" class="boardList-title">게시글제목</a></td>
-			        <td>홍길동</td>
-			        <td>2021.05.08 21:51:13</td>
-			        <td>2</td>
-	     		</tr>
+	    		<c:forEach items="${boardList}" var="board">
+		      		<tr>
+				        <td>${board.bo_num}</td>
+				        <td><a href="#" class="boardList-title">${board.bo_title}</a></td>
+				        <td>${board.bo_mb_nickname}</td>
+				        <td>${board.bo_registerDate}</td>
+				        <td>${board.bo_view}</td>
+		     		</tr>
+	     		</c:forEach>
 	    	</tbody>
 	  	</table>
 	  	<div class="boardList-btn-box">

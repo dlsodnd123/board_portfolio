@@ -7,4 +7,8 @@
 		insert into board(bo_mb_nickname, bo_title, bo_content)
 			values(#{board.bo_mb_nickname}, #{board.bo_title}, #{board.bo_content})
 	</insert>
+	
+	<select id="selectBoardList" resultType="kr.spring.board_portfolio.vo.BoardVo">
+		select * from board where bo_isDel = 'N' order by bo_num desc
+	</select>
 </mapper>

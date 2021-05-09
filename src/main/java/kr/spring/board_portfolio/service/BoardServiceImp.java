@@ -1,5 +1,7 @@
 package kr.spring.board_portfolio.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,12 @@ public class BoardServiceImp implements BoardService{
 	@Override
 	public void setBoard(BoardVo board) {
 		boardDao.insertBoard(board);
+	}
+
+	// 게시글목록 가져오기
+	@Override
+	public ArrayList<BoardVo> getBoardList() {
+		return boardDao.selectBoardList();
 	}
 
 }
