@@ -26,4 +26,10 @@ public class BoardServiceImp implements BoardService{
 		return boardDao.selectBoardList();
 	}
 
+	// 게시글 번호와 일치하는 게시글 가져오기
+	@Override
+	public BoardVo getBoard(int bo_num) {
+		return boardDao.selectBoard(bo_num);
+	}
+
 }

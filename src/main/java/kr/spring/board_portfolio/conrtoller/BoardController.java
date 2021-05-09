@@ -45,4 +45,15 @@ public class BoardController {
 		return mv;
 	}
 	
+	// 게시글상세 페이지 담당
+	@RequestMapping(value = "/board/detail", method = RequestMethod.GET)
+	public ModelAndView boardDeatilGet(ModelAndView mv, int bo_num) {
+		BoardVo board = boardService.getBoard(bo_num);
+		System.out.println(board);
+		
+		mv.addObject("board", board);
+		mv.setViewName("/board/boardDetail");
+		return mv;
+	}
+	
 }

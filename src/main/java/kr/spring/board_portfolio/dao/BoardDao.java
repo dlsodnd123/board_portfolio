@@ -12,4 +12,6 @@ public interface BoardDao {
 
 	ArrayList<BoardVo> selectBoardList();
 
+	BoardVo selectBoard(@Param("bo_num")int bo_num);
+
 }

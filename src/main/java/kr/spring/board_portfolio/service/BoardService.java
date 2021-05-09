@@ -10,4 +10,6 @@ public interface BoardService {
 
 	ArrayList<BoardVo> getBoardList();
 
+	BoardVo getBoard(int bo_num);
+
 }

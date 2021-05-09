@@ -11,4 +11,8 @@
 	<select id="selectBoardList" resultType="kr.spring.board_portfolio.vo.BoardVo">
 		select * from board where bo_isDel = 'N' order by bo_num desc
 	</select>
+	
+	<select id="selectBoard" resultType="kr.spring.board_portfolio.vo.BoardVo">
+		select * from board where bo_num = #{bo_num}
+	</select>
 </mapper>
