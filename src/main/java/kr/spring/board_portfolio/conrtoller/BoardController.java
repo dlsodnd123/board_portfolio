@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.board_portfolio.service.BoardService;
@@ -49,11 +50,38 @@ public class BoardController {
 	@RequestMapping(value = "/board/detail", method = RequestMethod.GET)
 	public ModelAndView boardDeatilGet(ModelAndView mv, int bo_num) {
 		BoardVo board = boardService.getBoard(bo_num);
-		System.out.println(board);
 		
 		mv.addObject("board", board);
 		mv.setViewName("/board/boardDetail");
 		return mv;
 	}
+	
+	// 게시글수정 페이지 담당
+	@RequestMapping(value = "/board/modify", method = RequestMethod.GET)
+	public ModelAndView boardModifyGet(ModelAndView mv, int bo_num) {
+		BoardVo board = boardService.getBoard(bo_num);
+		
+		mv.addObject("board", board);
+		mv.setViewName("/board/boardModify");
+		return mv;
+	}
+	
+	// 게시글 수정을 담당
+	@RequestMapping(value = "/board/modify", method = RequestMethod.POST)
+	public ModelAndView boardModifyPost(ModelAndView mv, BoardVo board) {
+		boardService.modifyBoard(board);
+		
+		mv.setViewName("redirect:/board/detail?bo_num=" + board.getBo_num());
+		return mv;
+	}
+	
+	// 게시글 삭제 담당
+	@RequestMapping(value = "/board/del", method = RequestMethod.POST)
+	@ResponseBody
+	public String boardDelPost(int bo_num) {
+		boardService.delBoard(bo_num);
+		return "success";
+	}
+
 	
 }

@@ -32,4 +32,16 @@ public class BoardServiceImp implements BoardService{
 		return boardDao.selectBoard(bo_num);
 	}
 
+	// 게시글 수정하기
+	@Override
+	public void modifyBoard(BoardVo board) {
+		boardDao.updateBoard(board);
+	}
+
+	// 게시글 삭제여부 변경하기
+	@Override
+	public void delBoard(int bo_num) {
+		boardDao.delBoard(bo_num);
+	}
+
 }

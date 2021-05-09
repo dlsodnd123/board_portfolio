@@ -14,4 +14,8 @@ public interface BoardDao {
 
 	BoardVo selectBoard(@Param("bo_num")int bo_num);
 
+	void updateBoard(@Param("board")BoardVo board);
+
+	void delBoard(@Param("bo_num")int bo_num);
+
 }

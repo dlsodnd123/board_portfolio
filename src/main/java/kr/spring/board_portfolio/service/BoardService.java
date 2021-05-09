@@ -12,4 +12,8 @@ public interface BoardService {
 
 	BoardVo getBoard(int bo_num);
 
+	void modifyBoard(BoardVo board);
+
+	void delBoard(int bo_num);
+
 }

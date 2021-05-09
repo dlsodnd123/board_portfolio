@@ -43,7 +43,7 @@
 	.boardDetail-comment-box{
 		border-top: 1px solid #dee2e6;
 		font-size: 12px;
-		background-color: lightgray;
+		background-color: whitesmoke;
 		padding-bottom: 15px; 
 	}
 	.comment-info-box{
@@ -76,6 +76,11 @@
 	.commentReg-btn{
 	 	padding: 25px 10px;
 	}
+	.boardDetail-btn-box:after {
+		content: '';
+		clear: both;
+		display: block;
+	}
 </style>
 </head>
 <body>
@@ -105,12 +110,41 @@
 				<textarea rows="4" class="commentReg-content"></textarea>
 				<button type="button" class="btn btn-light commentReg-btn">등록</button>
 			</div>
-		</div>
+		</div>		
 		<div class="boardDetail-btn-box">
-			<a href="#"><button type="button" class="btn btn-info boardDetail-modify-btn">수정</button></a>
-			<a href="#"><button type="button" class="btn btn-secondary boardDetail-delete-btn">삭제</button></a>
+			<c:if test="${member.mb_nickname == board.bo_mb_nickname}">
+				<a href="<%=request.getContextPath()%>/board/modify?bo_num=${board.bo_num}"><button type="button" class="btn btn-info boardDetail-modify-btn">수정</button></a>
+				<button type="button" class="btn btn-secondary boardDetail-delete-btn">삭제</button>
+			</c:if>
 			<a href="<%=request.getContextPath()%>/board/list"><button type="button" class="btn btn-light boardDetail-list-btn">목록</button></a>
-		</div>
+		</div>		
 	</div>
 </body>
+<script type="text/javascript">
+	$('.boardDetail-delete-btn').click(function(){
+		if("${board.bo_mb_nickname}" != "${member.mb_nickname}" || "${member.mb_nickname}" == null){
+			alert('권한이 없습니다.')
+			return false;
+		}
+		var isDel = confirm('게시글을 삭제 하시겠습니까?')
+		if(isDel){
+			var bo_num = "${board.bo_num}"
+			var data = {"bo_num" : bo_num}
+			$.ajax({
+	    		async: true,
+	    		type: 'POST',
+	    		data: data,
+	    		url: '<%=request.getContextPath()%>/board/del',
+	    		success: function(data){
+	    			if(data == 'success')
+	    			location.href = '<%=request.getContextPath()%>/board/list'
+	    		},
+	    		error: function(error) {
+	    			console.log('에러발생');
+	    		}
+	    	})
+
+		}
+	})
+</script>
 </html>

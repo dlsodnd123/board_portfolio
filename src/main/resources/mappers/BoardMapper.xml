@@ -15,4 +15,12 @@
 	<select id="selectBoard" resultType="kr.spring.board_portfolio.vo.BoardVo">
 		select * from board where bo_num = #{bo_num}
 	</select>
+	
+	<update id="updateBoard">
+		update board set bo_title = #{board.bo_title}, bo_content = #{board.bo_content} where bo_num = #{board.bo_num}
+	</update>
+	
+	<update id="delBoard">
+		update board set bo_isDel = 'Y' where bo_num = #{bo_num}
+	</update>
 </mapper>
