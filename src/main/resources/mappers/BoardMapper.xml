@@ -3,5 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.board_portfolio.dao.BoardDao">
-
+	<insert id="insertBoard">
+		insert into board(bo_mb_nickname, bo_title, bo_content)
+			values(#{board.bo_mb_nickname}, #{board.bo_title}, #{board.bo_content})
+	</insert>
 </mapper>

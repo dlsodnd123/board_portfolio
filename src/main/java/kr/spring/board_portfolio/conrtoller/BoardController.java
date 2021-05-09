@@ -31,10 +31,10 @@ public class BoardController {
 		return mv;
 	}
 	
-	// 게시글 등록 담당
+	// 게시글을 DB 등록을 담당
 	@RequestMapping(value = "/board/register", method = RequestMethod.POST)
 	public ModelAndView boardRegisterPost(ModelAndView mv, BoardVo board) {
-		System.out.println(board);
+		boardService.setBoard(board);
 		
 		mv.setViewName("redirect:/board/list");
 		return mv;
