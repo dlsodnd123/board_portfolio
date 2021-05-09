@@ -1,5 +1,6 @@
 package kr.spring.board_portfolio.vo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BoardVo {
@@ -36,8 +37,10 @@ public class BoardVo {
 	public void setBo_content(String bo_content) {
 		this.bo_content = bo_content;
 	}
-	public Date getBo_registerDate() {
-		return bo_registerDate;
+	public String getBo_registerDate() {
+		SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String dateString = simpleFormat.format(bo_registerDate);
+		return dateString;
 	}
 	public void setBo_registerDate(Date bo_registerDate) {
 		this.bo_registerDate = bo_registerDate;
