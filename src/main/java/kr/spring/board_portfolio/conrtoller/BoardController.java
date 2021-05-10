@@ -59,7 +59,9 @@ public class BoardController {
 	@RequestMapping(value = "/board/detail", method = RequestMethod.GET)
 	public ModelAndView boardDeatilGet(ModelAndView mv, int bo_num) {
 		BoardVo board = boardService.getBoard(bo_num);
+		ArrayList <CommentVo> commentList = boardService.getCommentList(bo_num);
 		
+		mv.addObject("commentList", commentList);
 		mv.addObject("board", board);
 		mv.setViewName("/board/boardDetail");
 		return mv;
@@ -98,10 +100,19 @@ public class BoardController {
 	public Object commentRegisterPost(@RequestBody CommentVo comment) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		boardService.setComment(comment);
-		System.out.println(comment);
 		
 		map.put("result", "success");
 		return map;
 	}
-
+	
+	// 댓글 수정 담당
+		@RequestMapping(value = "/comment/modify", method = RequestMethod.POST)
+		@ResponseBody
+		public Object commentModifyPost(@RequestBody CommentVo comment) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			boardService.modifyComment(comment);
+			System.out.println(comment);
+			map.put("result", "success");
+			return map;
+		}
 }

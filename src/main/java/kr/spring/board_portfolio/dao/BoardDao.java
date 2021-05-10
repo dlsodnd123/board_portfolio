@@ -24,4 +24,8 @@ public interface BoardDao {
 
 	void insertComment(@Param("comment")CommentVo comment);
 
+	ArrayList<CommentVo> selectCommentList(@Param("bo_num")int bo_num);
+
+	void updateComment(@Param("comment")CommentVo comment);
+
 }

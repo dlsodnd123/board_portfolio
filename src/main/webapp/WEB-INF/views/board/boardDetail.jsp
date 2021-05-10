@@ -37,7 +37,8 @@
 		padding: 10px 12px;
 		font-size: 12px;
 	}
-	#bo_content:focus {
+	#bo_content:focus,
+	.comment-modify-content:focus{
 		outline: none;
 	}
 	.boardDetail-comment-box{
@@ -46,10 +47,18 @@
 		background-color: whitesmoke;
 		padding-bottom: 15px; 
 	}
+	.boardDetail-comment-box .btn{
+		border-color: #707070;
+	}
 	.comment-info-box{
 		padding: 10px 0;
 		margin: 0 10px;
 		border-bottom: 1px solid #707070;
+	}
+	.comment-info-box:after{
+		content: '';
+		clear: both;
+		display: block;
 	}
 	.comment-wirter,
 	.comment-registerDate{
@@ -81,6 +90,29 @@
 		clear: both;
 		display: block;
 	}
+	.comment-btn-box{
+		float: right;
+		
+	}
+	.comment-btn-box>.btn{
+		font-size: 12px;
+		padding: 7px;
+	}
+	.comment-modify-box{
+		display: none;
+		margin-top: 12px; 
+	}
+	.comment-modify-content{
+		resize: none;
+		width: 88%;
+		vertical-align: middle;
+	}
+	.modify-confirm-btn,
+	.modify-cancel-btn{
+		font-size: 13px;
+		padding: 9px 0;
+		width: 5%;
+	}
 </style>
 </head>
 <body>
@@ -101,11 +133,25 @@
 		</table>
 		<textarea rows="13" id="bo_content" class="bo_content" readonly>${board.bo_content}</textarea>
 		<div class="boardDetail-comment-box">
-			<div class="comment-info-box">
-				<div class="comment-wirter">아이디</div>
-				<div class="comment-registerDate">2021.05.09 13:31:49</div>
-				<div class="comment-content">댓글내용</div>				
-			</div>
+			<c:forEach items="${commentList}" var="comment">
+				<div class="comment-info-box">
+					<div class="comment-wirter">${comment.com_mb_nickname}</div>
+					<div class="comment-registerDate">${comment.com_registerDate}</div>
+					<c:if test="${member.mb_nickname == comment.com_mb_nickname}">
+						<div class="comment-btn-box">
+							<button type="button" class="btn btn-light comment-modify-btn">수정</button>
+							<button type="button" class="btn btn-light comment-del-btn">삭제</button>
+						</div>
+					</c:if>
+					<div class="comment-content">${comment.com_content}</div>
+					<div class="comment-modify-box">
+						<textarea rows="2" class="comment-modify-content">${comment.com_content}</textarea>
+						<button type="button" class="btn btn-light modify-confirm-btn">확인</button>
+						<button type="button" class="btn btn-light modify-cancel-btn">취소</button>
+					</div>
+					<input type="hidden" name="com_num" value="${comment.com_num}">
+				</div>
+			</c:forEach>
 			<c:if test="${member.mb_nickname != board.bo_mb_nickname}">
 				<div class="boardDetail-commentReg-box">
 					<textarea rows="4" class="commentReg-content"></textarea>
@@ -173,6 +219,48 @@
 	        contentType:"application/json; charset=UTF-8",
 			success : function(data){
 				
+			},
+   	     	error: function(error) {
+   	        	console.log('에러발생');
+   	    	}
+		})
+	})
+	// 댓글 수정 버튼 클릭시
+	$('.comment-modify-btn').click(function(){
+		$(this).parents('.comment-btn-box').siblings('.comment-modify-box').show();
+		$(this).parents('.comment-btn-box').siblings('.comment-content').hide();
+		$(this).parents('.comment-btn-box').hide();
+	})
+	// 댓글 수정 버튼 클릭 후 취소 버튼 클릭시
+	$('.modify-cancel-btn').click(function(){
+		$(this).parents('.comment-modify-box').siblings('.comment-btn-box').show();
+		$(this).parents('.comment-modify-box').siblings('.comment-content').show();
+		$(this).parents('.comment-modify-box').hide();
+	})
+	// 댓글 수정 버튼 클릭 후 확인 버튼 클릭시
+	$('.modify-confirm-btn').click(function(){
+		var clickPoint = $(this);
+		var com_content = $(this).siblings('.comment-modify-content').val();
+		if(com_content == ''){
+			alert('1글자 이상 입력해야 합니다.');
+			return false;
+		}
+		var com_num = $('input[name=com_num]').val();
+		var sendData = {"com_content" : com_content, "com_num" : com_num}
+		$.ajax({			
+			async: false,
+			type : 'post',
+			data : JSON.stringify(sendData),
+			dataType:"json",
+			url : '<%=request.getContextPath()%>/comment/modify',
+	        contentType:"application/json; charset=UTF-8",
+			success : function(data){
+				if(data.result == 'success'){
+					clickPoint.parent().siblings('.comment-content').text(com_content);
+					clickPoint.parents('.comment-modify-box').siblings('.comment-btn-box').show();
+					clickPoint.parents('.comment-modify-box').siblings('.comment-content').show();
+					clickPoint.parents('.comment-modify-box').hide();
+				}
 			},
    	     	error: function(error) {
    	        	console.log('에러발생');

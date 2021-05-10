@@ -32,4 +32,12 @@
 		insert into comment(com_mb_nickname, com_bo_num, com_content)
 			values(#{comment.com_mb_nickname}, #{comment.com_bo_num}, #{comment.com_content})
 	</insert>
+	
+	<select id="selectCommentList" resultType="kr.spring.board_portfolio.vo.CommentVo">
+		select * from comment where com_bo_num = #{bo_num} and com_isDel = 'N'
+	</select>
+	
+	<update id="updateComment">
+		update comment set com_content = #{comment.com_content} where com_num = #{comment.com_num}
+	</update>
 </mapper>

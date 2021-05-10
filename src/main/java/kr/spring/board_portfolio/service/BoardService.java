@@ -22,4 +22,8 @@ public interface BoardService {
 
 	void setComment(CommentVo comment);
 
+	ArrayList<CommentVo> getCommentList(int bo_num);
+
+	void modifyComment(CommentVo comment);
+
 }

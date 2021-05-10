@@ -58,4 +58,16 @@ public class BoardServiceImp implements BoardService{
 		boardDao.insertComment(comment);
 	}
 
+	// 댓글 목록 가져오기
+	@Override
+	public ArrayList<CommentVo> getCommentList(int bo_num) {
+		return boardDao.selectCommentList(bo_num);
+	}
+
+	// 댓글 수정하기
+	@Override
+	public void modifyComment(CommentVo comment) {
+		boardDao.updateComment(comment);
+	}
+
 }
