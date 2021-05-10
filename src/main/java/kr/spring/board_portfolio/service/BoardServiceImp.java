@@ -70,4 +70,16 @@ public class BoardServiceImp implements BoardService{
 		boardDao.updateComment(comment);
 	}
 
+	// 댓글 삭제하기
+	@Override
+	public String delComment(CommentVo comment) {
+		CommentVo checkComment = boardDao.selectComment(comment.getCom_num());
+		if(checkComment == null) {
+			return "noneComment";
+		}else {
+			boardDao.delComment(comment);
+		}
+		return "success";
+	}
+
 }

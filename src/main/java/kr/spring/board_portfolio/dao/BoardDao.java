@@ -28,4 +28,8 @@ public interface BoardDao {
 
 	void updateComment(@Param("comment")CommentVo comment);
 
+	CommentVo selectComment(@Param("com_num")int com_num);
+
+	void delComment(@Param("comment")CommentVo comment);
+
 }

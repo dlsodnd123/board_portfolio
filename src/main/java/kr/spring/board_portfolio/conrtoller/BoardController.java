@@ -106,13 +106,24 @@ public class BoardController {
 	}
 	
 	// 댓글 수정 담당
-		@RequestMapping(value = "/comment/modify", method = RequestMethod.POST)
-		@ResponseBody
-		public Object commentModifyPost(@RequestBody CommentVo comment) {
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			boardService.modifyComment(comment);
-			System.out.println(comment);
-			map.put("result", "success");
-			return map;
-		}
+	@RequestMapping(value = "/comment/modify", method = RequestMethod.POST)
+	@ResponseBody
+	public Object commentModifyPost(@RequestBody CommentVo comment) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		boardService.modifyComment(comment);
+		
+		map.put("result", "success");
+		return map;
+	}
+	
+	// 댓글 삭제 담당
+	@RequestMapping(value = "/comment/del", method = RequestMethod.POST)
+	@ResponseBody
+	public Object commentDelPost(@RequestBody CommentVo comment) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String result = boardService.delComment(comment);
+		
+		map.put("result", result);
+		return map;
+	}
 }

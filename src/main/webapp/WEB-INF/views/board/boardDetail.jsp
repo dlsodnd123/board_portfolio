@@ -225,6 +225,7 @@
    	    	}
 		})
 	})
+	
 	// 댓글 수정 버튼 클릭시
 	$('.comment-modify-btn').click(function(){
 		$(this).parents('.comment-btn-box').siblings('.comment-modify-box').show();
@@ -245,7 +246,7 @@
 			alert('1글자 이상 입력해야 합니다.');
 			return false;
 		}
-		var com_num = $('input[name=com_num]').val();
+		var com_num = $(this).parent().siblings('input[name=com_num]').val();
 		var sendData = {"com_content" : com_content, "com_num" : com_num}
 		$.ajax({			
 			async: false,
@@ -266,7 +267,35 @@
    	        	console.log('에러발생');
    	    	}
 		})
-
+	})
+	
+	// 댓글 삭제 버튼 클릭시
+	$('.comment-del-btn').click(function(){
+		if(confirm('댓글이 삭제 됩니다. 삭제 하시겠습니까?')){
+			var clickPoint = $(this);
+			var com_mb_nickname = $(this).parents('.comment-info-box').find('.comment-wirter').text();
+			var com_num = $(this).parent().siblings('input[name=com_num]').val();
+			var sendData = {"com_mb_nickname" : com_mb_nickname, "com_num" : com_num}
+			$.ajax({			
+				async: false,
+				type : 'post',
+				data : JSON.stringify(sendData),
+				dataType:"json",
+				url : '<%=request.getContextPath()%>/comment/del',
+		        contentType:"application/json; charset=UTF-8",
+				success : function(data){
+					if(data.result == 'success'){
+						clickPoint.parents('.comment-info-box').remove();
+					}else{
+						alert('존재하지 않는 댓글 입니다. 게시글 목록으로 이동합니다.')
+						location.href = '<%=request.getContextPath()%>/board/list'
+					}
+				},
+	   	     	error: function(error) {
+	   	        	console.log('에러발생');
+	   	    	}
+			})
+		}
 	})
 </script>
 </html>

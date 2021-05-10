@@ -26,4 +26,6 @@ public interface BoardService {
 
 	void modifyComment(CommentVo comment);
 
+	String delComment(CommentVo comment);
+
 }

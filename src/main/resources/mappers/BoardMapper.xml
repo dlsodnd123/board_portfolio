@@ -40,4 +40,12 @@
 	<update id="updateComment">
 		update comment set com_content = #{comment.com_content} where com_num = #{comment.com_num}
 	</update>
+	
+	<select id="selectComment" resultType="kr.spring.board_portfolio.vo.CommentVo">
+		select * from comment where com_num = #{com_num}
+	</select>
+	
+	<update id="delComment">
+		update comment set com_isDel = 'Y' where com_num = #{comment.com_num} and com_mb_nickname = #{comment.com_mb_nickname}
+	</update>
 </mapper>
