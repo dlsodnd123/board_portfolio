@@ -100,7 +100,6 @@ public class BoardController {
 	public Object commentRegisterPost(@RequestBody CommentVo comment) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		boardService.setComment(comment);
-		System.out.println(comment.getCom_num());
 		CommentVo newComment = boardService.getNewComment(comment.getCom_num());
 		
 		map.put("newComment", newComment);
