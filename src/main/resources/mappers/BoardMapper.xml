@@ -28,7 +28,7 @@
 		select count(*) from board where bo_isDel = 'N'
 	</select>
 	
-	<insert id="insertComment">
+	<insert id="insertComment" useGeneratedKeys="true" keyProperty="comment.com_num">
 		insert into comment(com_mb_nickname, com_bo_num, com_content)
 			values(#{comment.com_mb_nickname}, #{comment.com_bo_num}, #{comment.com_content})
 	</insert>

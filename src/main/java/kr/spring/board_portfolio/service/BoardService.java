@@ -28,4 +28,6 @@ public interface BoardService {
 
 	String delComment(CommentVo comment);
 
+	CommentVo getNewComment(int com_num);
+
 }

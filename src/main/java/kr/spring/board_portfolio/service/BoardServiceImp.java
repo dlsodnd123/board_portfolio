@@ -82,4 +82,10 @@ public class BoardServiceImp implements BoardService{
 		return "success";
 	}
 
+	// 등록한 댓글 바로 가져오기
+	@Override
+	public CommentVo getNewComment(int com_num) {
+		return boardDao.selectComment(com_num);
+	}
+
 }

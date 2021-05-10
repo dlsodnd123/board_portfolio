@@ -219,6 +219,27 @@
 	        contentType:"application/json; charset=UTF-8",
 			success : function(data){
 				
+				$('.commentReg-content').val('');
+				var str = '';
+				str += '<div class="comment-info-box">'
+				str += '<div class="comment-wirter">' + data.newComment.com_mb_nickname + '</div>'
+				str += '<div class="comment-registerDate">' + data.newComment.com_registerDate + '</div>'
+				if("${member.mb_nickname}" == data.newComment.com_mb_nickname){
+					str += '<div class="comment-btn-box">'
+					str += '<button type="button" class="btn btn-light comment-modify-btn">수정</button>'
+					str += '<button type="button" class="btn btn-light comment-del-btn">삭제</button>'
+					str += '</div>'
+				}
+				str += '<div class="comment-content">' + data.newComment.com_content + '</div>'
+				str += '<div class="comment-modify-box">'
+				str += '<textarea rows="2" class="comment-modify-content">' + data.newComment.com_content + '</textarea>'
+				str += '<button type="button" class="btn btn-light modify-confirm-btn">확인</button>'
+				str += '<button type="button" class="btn btn-light modify-cancel-btn">취소</button>'
+				str += '</div>'
+				str += '<input type="hidden" name="com_num" value="' + data.newComment.com_num + '">'
+				str += '</div>'
+				$('.comment-info-box').last().after(str);
+				
 			},
    	     	error: function(error) {
    	        	console.log('에러발생');
