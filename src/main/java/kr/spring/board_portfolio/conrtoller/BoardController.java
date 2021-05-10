@@ -1,9 +1,11 @@
 package kr.spring.board_portfolio.conrtoller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +15,7 @@ import kr.spring.board_portfolio.pagination.Criteria;
 import kr.spring.board_portfolio.pagination.PageMaker;
 import kr.spring.board_portfolio.service.BoardService;
 import kr.spring.board_portfolio.vo.BoardVo;
+import kr.spring.board_portfolio.vo.CommentVo;
 
 @Controller
 public class BoardController {
@@ -89,4 +92,16 @@ public class BoardController {
 		return "success";
 	}
 	
+	// 댓글 동록 담당
+	@RequestMapping(value = "/comment/register", method = RequestMethod.POST)
+	@ResponseBody
+	public Object commentRegisterPost(@RequestBody CommentVo comment) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		boardService.setComment(comment);
+		System.out.println(comment);
+		
+		map.put("result", "success");
+		return map;
+	}
+
 }

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.spring.board_portfolio.pagination.Criteria;
 import kr.spring.board_portfolio.vo.BoardVo;
+import kr.spring.board_portfolio.vo.CommentVo;
 
 public interface BoardDao {
 
@@ -20,5 +21,7 @@ public interface BoardDao {
 	void delBoard(@Param("bo_num")int bo_num);
 
 	int selectBoardCount();
+
+	void insertComment(@Param("comment")CommentVo comment);
 
 }

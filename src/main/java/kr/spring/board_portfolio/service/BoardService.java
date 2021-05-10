@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import kr.spring.board_portfolio.pagination.Criteria;
 import kr.spring.board_portfolio.vo.BoardVo;
+import kr.spring.board_portfolio.vo.CommentVo;
 
 public interface BoardService {
 
@@ -18,5 +19,7 @@ public interface BoardService {
 	void delBoard(int bo_num);
 
 	int getBoardCount();
+
+	void setComment(CommentVo comment);
 
 }

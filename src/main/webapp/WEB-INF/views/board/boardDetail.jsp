@@ -106,10 +106,12 @@
 				<div class="comment-registerDate">2021.05.09 13:31:49</div>
 				<div class="comment-content">댓글내용</div>				
 			</div>
-			<div class="boardDetail-commentReg-box">
-				<textarea rows="4" class="commentReg-content"></textarea>
-				<button type="button" class="btn btn-light commentReg-btn">등록</button>
-			</div>
+			<c:if test="${member.mb_nickname != board.bo_mb_nickname}">
+				<div class="boardDetail-commentReg-box">
+					<textarea rows="4" class="commentReg-content"></textarea>
+					<button type="button" class="btn btn-light commentReg-btn">등록</button>
+				</div>
+			</c:if>
 		</div>		
 		<div class="boardDetail-btn-box">
 			<c:if test="${member.mb_nickname == board.bo_mb_nickname}">
@@ -121,6 +123,7 @@
 	</div>
 </body>
 <script type="text/javascript">
+	// 게시글 삭제 버튼 클릭시
 	$('.boardDetail-delete-btn').click(function(){
 		if("${board.bo_mb_nickname}" != "${member.mb_nickname}" || "${member.mb_nickname}" == null){
 			alert('권한이 없습니다.')
@@ -145,6 +148,37 @@
 	    	})
 
 		}
+	})
+	
+	// 댓글 등록 버튼 클릭시
+	$('.commentReg-btn').click(function(){
+		if("${member}" == ""){
+			alert('로그인이 필요합니다.');
+			return false;
+		}
+		var com_content = $('.commentReg-content').val();
+		if(com_content == '') {
+			alert('1글자 이상 입력해야 합니다.');
+			return false;
+		}
+		var com_mb_nickname = "${member.mb_nickname}";
+		var com_bo_num = "${board.bo_num}";
+		var sendData = {"com_content" : com_content, "com_mb_nickname" : com_mb_nickname, "com_bo_num" : com_bo_num}
+		$.ajax({			
+			async: false,
+			type : 'post',
+			data : JSON.stringify(sendData),
+			dataType:"json",
+			url : '<%=request.getContextPath()%>/comment/register',
+	        contentType:"application/json; charset=UTF-8",
+			success : function(data){
+				
+			},
+   	     	error: function(error) {
+   	        	console.log('에러발생');
+   	    	}
+		})
+
 	})
 </script>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.spring.board_portfolio.dao.BoardDao;
 import kr.spring.board_portfolio.pagination.Criteria;
 import kr.spring.board_portfolio.vo.BoardVo;
+import kr.spring.board_portfolio.vo.CommentVo;
 
 @Service
 public class BoardServiceImp implements BoardService{
@@ -49,6 +50,12 @@ public class BoardServiceImp implements BoardService{
 	@Override
 	public int getBoardCount() {
 		return boardDao.selectBoardCount();
+	}
+
+	// 댓글 등록하기
+	@Override
+	public void setComment(CommentVo comment) {
+		boardDao.insertComment(comment);
 	}
 
 }
