@@ -24,6 +24,9 @@
 		clear: both;
 		display: block;
 	}
+	.pagination{
+		font-size: 14px;
+	}
 </style>
 </head>
 <body>
@@ -51,6 +54,17 @@
 	     		</c:forEach>
 	    	</tbody>
 	  	</table>
+	  	<ul class="pagination justify-content-center">
+	  		<c:if test="${pageMaker.prev}">
+		    	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.startPage - 1}">이전</a></li>
+		    </c:if>
+		    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="index">		    	
+		    	<li class="page-item <c:if test="${pageMaker.criteria.page == index}">active</c:if>"><a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${index}">${index}</a></li>		    	
+		    </c:forEach>
+		    <c:if test="${pageMaker.next}">
+		    	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.endPage + 1}">다음</a></li>
+		    </c:if>
+		  </ul>
 	  	<div class="boardList-btn-box">
 	  		<a href="<%=request.getContextPath()%>/board/register"><button type="button" class="btn btn-info writing-btn">글쓰기</button></a>
 	  	</div>

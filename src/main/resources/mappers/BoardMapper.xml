@@ -9,7 +9,7 @@
 	</insert>
 	
 	<select id="selectBoardList" resultType="kr.spring.board_portfolio.vo.BoardVo">
-		select * from board where bo_isDel = 'N' order by bo_num desc
+		select * from board where bo_isDel = 'N' order by bo_num desc limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	
 	<select id="selectBoard" resultType="kr.spring.board_portfolio.vo.BoardVo">
@@ -23,4 +23,8 @@
 	<update id="delBoard">
 		update board set bo_isDel = 'Y' where bo_num = #{bo_num}
 	</update>
+	
+	<select id="selectBoardCount" resultType="int">
+		select count(*) from board where bo_isDel = 'N'
+	</select>
 </mapper>

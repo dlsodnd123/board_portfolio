@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.board_portfolio.pagination.Criteria;
+import kr.spring.board_portfolio.pagination.PageMaker;
 import kr.spring.board_portfolio.service.BoardService;
 import kr.spring.board_portfolio.vo.BoardVo;
 
@@ -20,10 +22,14 @@ public class BoardController {
 	
 	// 게시글 목록 페이지 담당
 	@RequestMapping(value = "/board/list", method = RequestMethod.GET)
-	public ModelAndView boardListGet(ModelAndView mv) {
+	public ModelAndView boardListGet(ModelAndView mv, Criteria cri) {
 		// 게시글목록 가져오기
-		ArrayList<BoardVo> boardList = boardService.getBoardList();
+		ArrayList<BoardVo> boardList = boardService.getBoardList(cri);		
+		int totalCount = boardService.getBoardCount();
+		int displayPageNum = 3;
+		PageMaker pageMaker = new PageMaker(cri, displayPageNum, totalCount);
 				
+		mv.addObject("pageMaker", pageMaker);
 		mv.addObject("boardList", boardList);
 		mv.setViewName("/board/boardList");
 		return mv;
@@ -82,6 +88,5 @@ public class BoardController {
 		boardService.delBoard(bo_num);
 		return "success";
 	}
-
 	
 }

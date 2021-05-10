@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.spring.board_portfolio.dao.BoardDao;
+import kr.spring.board_portfolio.pagination.Criteria;
 import kr.spring.board_portfolio.vo.BoardVo;
 
 @Service
@@ -22,8 +23,8 @@ public class BoardServiceImp implements BoardService{
 
 	// 게시글목록 가져오기
 	@Override
-	public ArrayList<BoardVo> getBoardList() {
-		return boardDao.selectBoardList();
+	public ArrayList<BoardVo> getBoardList(Criteria cri) {
+		return boardDao.selectBoardList(cri);
 	}
 
 	// 게시글 번호와 일치하는 게시글 가져오기
@@ -42,6 +43,12 @@ public class BoardServiceImp implements BoardService{
 	@Override
 	public void delBoard(int bo_num) {
 		boardDao.delBoard(bo_num);
+	}
+
+	// 게시글의 총개수 가져오기
+	@Override
+	public int getBoardCount() {
+		return boardDao.selectBoardCount();
 	}
 
 }
