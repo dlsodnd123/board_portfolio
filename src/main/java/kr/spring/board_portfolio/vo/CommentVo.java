@@ -5,17 +5,17 @@ import java.util.Date;
 
 public class CommentVo {
 
-	private int com_int;
+	private int com_num;
 	private String com_mb_nickname;
 	private int com_bo_num;
 	private String com_content;
 	private Date com_registerDate;
 	private String com_isDel;
-	public int getCom_int() {
-		return com_int;
+	public int getCom_num() {
+		return com_num;
 	}
-	public void setCom_int(int com_int) {
-		this.com_int = com_int;
+	public void setCom_num(int com_num) {
+		this.com_num = com_num;
 	}
 	public String getCom_mb_nickname() {
 		return com_mb_nickname;
@@ -35,10 +35,8 @@ public class CommentVo {
 	public void setCom_content(String com_content) {
 		this.com_content = com_content;
 	}
-	public String getCom_registerDate() {
-		SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		String dateString = simpleFormat.format(com_registerDate);
-		return dateString;
+	public Date getCom_registerDate() {
+		return com_registerDate;
 	}
 	public void setCom_registerDate(Date com_registerDate) {
 		this.com_registerDate = com_registerDate;
@@ -51,8 +49,9 @@ public class CommentVo {
 	}
 	@Override
 	public String toString() {
-		return "CommentVo [com_int=" + com_int + ", com_mb_nickname=" + com_mb_nickname + ", com_bo_num=" + com_bo_num
+		return "CommentVo [com_num=" + com_num + ", com_mb_nickname=" + com_mb_nickname + ", com_bo_num=" + com_bo_num
 				+ ", com_content=" + com_content + ", com_registerDate=" + com_registerDate + ", com_isDel=" + com_isDel
 				+ "]";
-	}	
+	}
+	
 }
