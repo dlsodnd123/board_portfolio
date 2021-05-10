@@ -35,8 +35,10 @@ public class CommentVo {
 	public void setCom_content(String com_content) {
 		this.com_content = com_content;
 	}
-	public Date getCom_registerDate() {
-		return com_registerDate;
+	public String getCom_registerDate() {
+		SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String dateString = simpleFormat.format(com_registerDate);
+		return dateString;
 	}
 	public void setCom_registerDate(Date com_registerDate) {
 		this.com_registerDate = com_registerDate;
