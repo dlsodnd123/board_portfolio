@@ -239,6 +239,8 @@
 				str += '<input type="hidden" name="com_num" value="' + data.newComment.com_num + '">'
 				str += '</div>'
 				$('.comment-info-box').last().after(str);
+				eventCommentModifyBtnClick($('.comment-modify-btn'));
+				eventCommentDelBtnClick($('.comment-del-btn'));
 				
 			},
    	     	error: function(error) {
@@ -246,77 +248,87 @@
    	    	}
 		})
 	})
-	
 	// 댓글 수정 버튼 클릭시
-	$('.comment-modify-btn').click(function(){
-		$(this).parents('.comment-btn-box').siblings('.comment-modify-box').show();
-		$(this).parents('.comment-btn-box').siblings('.comment-content').hide();
-		$(this).parents('.comment-btn-box').hide();
-	})
-	// 댓글 수정 버튼 클릭 후 취소 버튼 클릭시
-	$('.modify-cancel-btn').click(function(){
-		$(this).parents('.comment-modify-box').siblings('.comment-btn-box').show();
-		$(this).parents('.comment-modify-box').siblings('.comment-content').show();
-		$(this).parents('.comment-modify-box').hide();
-	})
-	// 댓글 수정 버튼 클릭 후 확인 버튼 클릭시
-	$('.modify-confirm-btn').click(function(){
-		var clickPoint = $(this);
-		var com_content = $(this).siblings('.comment-modify-content').val();
-		if(com_content == ''){
-			alert('1글자 이상 입력해야 합니다.');
-			return false;
-		}
-		var com_num = $(this).parent().siblings('input[name=com_num]').val();
-		var sendData = {"com_content" : com_content, "com_num" : com_num}
-		$.ajax({			
-			async: false,
-			type : 'post',
-			data : JSON.stringify(sendData),
-			dataType:"json",
-			url : '<%=request.getContextPath()%>/comment/modify',
-	        contentType:"application/json; charset=UTF-8",
-			success : function(data){
-				if(data.result == 'success'){
-					clickPoint.parent().siblings('.comment-content').text(com_content);
-					clickPoint.parents('.comment-modify-box').siblings('.comment-btn-box').show();
-					clickPoint.parents('.comment-modify-box').siblings('.comment-content').show();
-					clickPoint.parents('.comment-modify-box').hide();
-				}
-			},
-   	     	error: function(error) {
-   	        	console.log('에러발생');
-   	    	}
-		})
-	})
-	
+	eventCommentModifyBtnClick($('.comment-modify-btn'));
 	// 댓글 삭제 버튼 클릭시
-	$('.comment-del-btn').click(function(){
-		if(confirm('댓글이 삭제 됩니다. 삭제 하시겠습니까?')){
+	eventCommentDelBtnClick($('.comment-del-btn'));
+	
+	// 댓글 수정 함수
+	function eventCommentModifyBtnClick(obj){
+		// 댓글 수정 버튼 클릭시
+		obj.click(function(){
+			$(this).parents('.comment-btn-box').siblings('.comment-modify-box').show();
+			$(this).parents('.comment-btn-box').siblings('.comment-content').hide();
+			$(this).parents('.comment-btn-box').hide();
+		})
+		// 댓글 수정 버튼 클릭 후 취소 버튼 클릭시
+		$('.modify-cancel-btn').click(function(){
+			$(this).parents('.comment-modify-box').siblings('.comment-btn-box').show();
+			$(this).parents('.comment-modify-box').siblings('.comment-content').show();
+			$(this).parents('.comment-modify-box').hide();
+		})
+		// 댓글 수정 버튼 클릭 후 확인 버튼 클릭시
+		$('.modify-confirm-btn').click(function(){
 			var clickPoint = $(this);
-			var com_mb_nickname = $(this).parents('.comment-info-box').find('.comment-wirter').text();
+			var com_content = $(this).siblings('.comment-modify-content').val();
+			if(com_content == ''){
+				alert('1글자 이상 입력해야 합니다.');
+				return false;
+			}
 			var com_num = $(this).parent().siblings('input[name=com_num]').val();
-			var sendData = {"com_mb_nickname" : com_mb_nickname, "com_num" : com_num}
+			var sendData = {"com_content" : com_content, "com_num" : com_num}
 			$.ajax({			
 				async: false,
 				type : 'post',
 				data : JSON.stringify(sendData),
 				dataType:"json",
-				url : '<%=request.getContextPath()%>/comment/del',
+				url : '<%=request.getContextPath()%>/comment/modify',
 		        contentType:"application/json; charset=UTF-8",
 				success : function(data){
 					if(data.result == 'success'){
-						clickPoint.parents('.comment-info-box').remove();
-					}else{
-						alert('존재하지 않는 댓글 입니다. 게시글 목록으로 이동합니다.')
-						location.href = '<%=request.getContextPath()%>/board/list'
+						clickPoint.parent().siblings('.comment-content').text(com_content);
+						clickPoint.parents('.comment-modify-box').siblings('.comment-btn-box').show();
+						clickPoint.parents('.comment-modify-box').siblings('.comment-content').show();
+						clickPoint.parents('.comment-modify-box').hide();
 					}
 				},
 	   	     	error: function(error) {
 	   	        	console.log('에러발생');
 	   	    	}
 			})
-		}
-	})
+		})
+	}
+	
+	// 댓글 삭제 함수
+	function eventCommentDelBtnClick(obj){
+		// 댓글 삭제 버튼 클릭시
+		obj.click(function(){
+			if(confirm('댓글이 삭제 됩니다. 삭제 하시겠습니까?')){
+				var clickPoint = $(this);
+				var com_mb_nickname = $(this).parents('.comment-info-box').find('.comment-wirter').text();
+				var com_num = $(this).parent().siblings('input[name=com_num]').val();
+				var sendData = {"com_mb_nickname" : com_mb_nickname, "com_num" : com_num}
+				$.ajax({			
+					async: false,
+					type : 'post',
+					data : JSON.stringify(sendData),
+					dataType:"json",
+					url : '<%=request.getContextPath()%>/comment/del',
+			        contentType:"application/json; charset=UTF-8",
+					success : function(data){
+						if(data.result == 'success'){
+							clickPoint.parents('.comment-info-box').remove();
+						}else{
+							alert('존재하지 않는 댓글 입니다. 게시글 목록으로 이동합니다.')
+							location.href = '<%=request.getContextPath()%>/board/list'
+						}
+					},
+		   	     	error: function(error) {
+		   	        	console.log('에러발생');
+		   	    	}
+				})
+			}
+		})
+	}
 </script>
 </html>
