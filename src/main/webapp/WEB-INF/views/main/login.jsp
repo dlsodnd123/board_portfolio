@@ -15,10 +15,15 @@
 	.login-btn{
 		width: 100%;
 		padding: 10px 0;
-		font-weight: 700;		
+		font-weight: 700;
+		margin-bottom: 15px;
 	}
 	.fa-sign-in-alt{
 		margin-right: 12px;
+	}
+	.kakao-login-btn{
+		width: 100%;
+		margin-bottom: 15px;
 	}
 </style>
 </head>
@@ -33,6 +38,7 @@
       			<input type="password" class="form-control" id="mb_pw" name="mb_pw" placeholder="비밀번호">
     		</div>
     		<button type="submit" class="btn btn-primary login-btn">로그인</button>
+    		<a href="https://kauth.kakao.com/oauth/authorize?client_id=46135f3668cd3705d613d5207f15d428&redirect_uri=http://192.168.0.7:8080/board_portfolio/&response_type=code"><img class="kakao-login-btn" src="<%=request.getContextPath()%>/resources/img/kakao_login_medium_wide.png"></a>
   		</form>
 	</div>	
 </body>

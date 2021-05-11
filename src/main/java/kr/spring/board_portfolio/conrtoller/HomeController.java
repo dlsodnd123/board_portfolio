@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.board_portfolio.kakaoLogin.KakaoAPI;
 import kr.spring.board_portfolio.service.MemberService;
 import kr.spring.board_portfolio.vo.MemberVo;
 
@@ -21,9 +22,15 @@ public class HomeController {
 	@Autowired
 	MemberService memberService;
 	
+	@Autowired
+	KakaoAPI kakao;
+	
 	// 메인 페이지 담당
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView homeGet(ModelAndView mv) {
+	public ModelAndView homeGet(ModelAndView mv, String code) {
+		String access_Token = kakao.getAccessToken(code);
+		HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
+		System.out.println(userInfo);
 		
 		mv.setViewName("/main/home");
 		return mv;
