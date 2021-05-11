@@ -30,4 +30,6 @@ public interface BoardService {
 
 	CommentVo getNewComment(int com_num);
 
+	void increaseView(int bo_num);
+
 }

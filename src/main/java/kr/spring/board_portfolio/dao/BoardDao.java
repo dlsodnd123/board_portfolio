@@ -32,4 +32,6 @@ public interface BoardDao {
 
 	void delComment(@Param("comment")CommentVo comment);
 
+	void updateView(@Param("bo_num")int bo_num);
+
 }

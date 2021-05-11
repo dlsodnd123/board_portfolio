@@ -88,4 +88,10 @@ public class BoardServiceImp implements BoardService{
 		return boardDao.selectComment(com_num);
 	}
 
+	// 조회수 증가 시키기
+	@Override
+	public void increaseView(int bo_num) {
+		boardDao.updateView(bo_num);
+	}
+
 }

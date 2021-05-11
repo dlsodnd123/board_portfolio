@@ -58,6 +58,8 @@ public class BoardController {
 	// 게시글상세 페이지 담당
 	@RequestMapping(value = "/board/detail", method = RequestMethod.GET)
 	public ModelAndView boardDeatilGet(ModelAndView mv, int bo_num) {
+		//조회수 증가 시키기
+		boardService.increaseView(bo_num);
 		BoardVo board = boardService.getBoard(bo_num);
 		ArrayList <CommentVo> commentList = boardService.getCommentList(bo_num);
 		
