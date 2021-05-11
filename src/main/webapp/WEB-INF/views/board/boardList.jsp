@@ -19,11 +19,14 @@
 	.table{
 		border-bottom: 1px solid #dee2e6;
 	}
+	.boardList-btn-box{
+		margin-bottom: 35px;	
+	}
 	.boardList-btn-box:after {
 		content: '';
 		clear: both;
 		display: block;
-	}
+	}	
 	.pagination{
 		font-size: 14px;
 	}
