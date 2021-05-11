@@ -9,7 +9,22 @@
 	</insert>
 	
 	<select id="selectBoardList" resultType="kr.spring.board_portfolio.vo.BoardVo">
-		select * from board where bo_isDel = 'N' order by bo_num desc limit #{cri.pageStart}, #{cri.perPageNum}
+		select * from board where bo_isDel = 'N' 
+			<if test="cri.type == 1">
+				and (bo_title like concat('%',#{cri.search},'%')
+				or bo_content like concat('%',#{cri.search},'%')
+				or bo_mb_nickname like concat('%',#{cri.search},'%'))
+			</if>
+			<if test="cri.type == 2">
+				and bo_title like concat('%',#{cri.search},'%')
+			</if>
+			<if test="cri.type == 3">
+				and bo_content like concat('%',#{cri.search},'%')
+			</if>
+			<if test="cri.type == 4">
+				and bo_mb_nickname like concat('%',#{cri.search},'%')
+			</if>
+			order by bo_num desc limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	
 	<select id="selectBoard" resultType="kr.spring.board_portfolio.vo.BoardVo">
