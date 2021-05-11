@@ -56,6 +56,10 @@ public class BoardServiceImp implements BoardService{
 	@Override
 	public void setComment(CommentVo comment) {
 		boardDao.insertComment(comment);
+		// 댓글 등록 후 댓글 갯수 증가시켜주기
+		int cnt = 1;
+		boardDao.updateCommentCnt(cnt, comment.getCom_bo_num());
+		System.out.println(comment);
 	}
 
 	// 댓글 목록 가져오기
@@ -78,6 +82,9 @@ public class BoardServiceImp implements BoardService{
 			return "noneComment";
 		}else {
 			boardDao.delComment(comment);
+			//댓글 삭제 후 댓글 갯수 감소시키기
+			int cnt = -1;
+			boardDao.updateCommentCnt(cnt, checkComment.getCom_bo_num());
 		}
 		return "success";
 	}

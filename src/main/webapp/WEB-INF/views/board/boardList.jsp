@@ -88,7 +88,7 @@
 	    		<c:forEach items="${boardList}" var="board">
 		      		<tr>
 				        <td>${board.bo_num}</td>
-				        <td><a href="<%=request.getContextPath()%>/board/detail?bo_num=${board.bo_num}" class="boardList-title">${board.bo_title}</a></td>
+				        <td><a href="<%=request.getContextPath()%>/board/detail?bo_num=${board.bo_num}" class="boardList-title">${board.bo_title}<c:if test="${board.bo_commentCnt > 0}">[${board.bo_commentCnt}]</c:if></a></td>
 				        <td>${board.bo_mb_nickname}</td>
 				        <td>${board.bo_registerDate}</td>
 				        <td>${board.bo_view}</td>

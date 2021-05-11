@@ -34,4 +34,6 @@ public interface BoardDao {
 
 	void updateView(@Param("bo_num")int bo_num);
 
+	void updateCommentCnt(@Param("cnt")int cnt, @Param("bo_num")int com_bo_num);
+
 }

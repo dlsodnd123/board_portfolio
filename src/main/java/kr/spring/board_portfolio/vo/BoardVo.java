@@ -13,6 +13,7 @@ public class BoardVo {
 	private int bo_view;
 	private int bo_recommendation;
 	private int bo_Notrecommendation;
+	private int bo_commentCnt;
 	public int getBo_num() {
 		return bo_num;
 	}
@@ -69,11 +70,17 @@ public class BoardVo {
 	public void setBo_Notrecommendation(int bo_Notrecommendation) {
 		this.bo_Notrecommendation = bo_Notrecommendation;
 	}
+	public int getBo_commentCnt() {
+		return bo_commentCnt;
+	}
+	public void setBo_commentCnt(int bo_commentCnt) {
+		this.bo_commentCnt = bo_commentCnt;
+	}
 	@Override
 	public String toString() {
 		return "BoardVo [bo_num=" + bo_num + ", bo_mb_nickname=" + bo_mb_nickname + ", bo_title=" + bo_title
 				+ ", bo_content=" + bo_content + ", bo_registerDate=" + bo_registerDate + ", bo_isDel=" + bo_isDel
 				+ ", bo_view=" + bo_view + ", bo_recommendation=" + bo_recommendation + ", bo_Notrecommendation="
-				+ bo_Notrecommendation + "]";
+				+ bo_Notrecommendation + ", bo_commentCnt=" + bo_commentCnt + "]";
 	}
 }
