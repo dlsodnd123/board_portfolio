@@ -14,4 +14,9 @@ public interface MemberService {
 
 	MemberVo getMemberId(String mb_id);
 
+	MemberVo getMember(String id);
+	
+	void setKakaoMember(String string);
+
+
 }

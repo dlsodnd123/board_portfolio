@@ -53,4 +53,52 @@ public class MemberServiceImp implements MemberService {
 		return memberDao.selectMemberId(mb_id);
 	}
 
+	// kakao 회원 정보 등록하기
+	@Override
+	public void setKakaoMember(String email) {
+		MemberVo member = new MemberVo();
+		// 랜덤한 비밀번호 만들어서 넣어주기
+		String pw = "";
+		for(int i=0; i<8; i++) {
+			int r = (int)(Math.random() * 62);
+			if(r <= 9)
+				pw += (char)('0' + r);
+			else if(r <= 35)
+				pw += (char)('a' + r - 10);
+			else
+				pw += (char)('A' + r - 36);
+		}
+		String enPw = passwordEncoder.encode(pw);
+		// 랜덤한 닉네임 만들어서 넣어주기(중복되지 않게)
+		String nickname = "";
+		String nicknameCheck = "";
+		do {
+			for(int i=0; i<8; i++) {
+				int r = (int)(Math.random() * 62);
+				if(r <= 9)
+					nickname += (char)('0' + r);
+				else if(r <= 35)
+					nickname += (char)('a' + r - 10);
+				else
+					nickname += (char)('A' + r - 36);
+			}
+			System.out.println(nickname);
+			nicknameCheck = memberDao.nicknmaeCheck(nickname);
+		}while(nicknameCheck != null);
+		
+		member.setMb_nickname(nickname);
+		member.setMb_pw(enPw);
+		member.setMb_id(email);
+		member.setMb_division("kakao");
+		System.out.println(member);
+		
+		memberDao.insertMember(member);
+	}
+
+	// 아이디와 일치하는 회원정보 가져오기
+	@Override
+	public MemberVo getMember(String id) {
+		return memberDao.selectMember(id);
+	}
+
 }

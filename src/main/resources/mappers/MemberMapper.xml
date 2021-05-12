@@ -20,5 +20,9 @@
   <select id="selectMemberId" resultType="kr.spring.board_portfolio.vo.MemberVo">
   	select * from member where mb_id = #{mb_id}
   </select>
+  
+  <select id="selectMember" resultType="kr.spring.board_portfolio.vo.MemberVo">
+  	select * from member where mb_id = #{id}
+  </select>
 </mapper>
 

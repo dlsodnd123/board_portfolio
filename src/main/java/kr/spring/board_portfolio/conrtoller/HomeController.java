@@ -30,8 +30,16 @@ public class HomeController {
 	public ModelAndView homeGet(ModelAndView mv, String code) {
 		String access_Token = kakao.getAccessToken(code);
 		HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
-		System.out.println(userInfo);
-		
+		MemberVo member = null;
+		if(userInfo.size() != 0) {
+			// 카카오에 등록된 이메일로 가입된 아이디가 있는지 검색
+			member = memberService.getMember((String)userInfo.get("email"));
+			// 가입된 아이디가 없으면 DB에 등록
+			if(member == null) {
+				memberService.setKakaoMember((String)userInfo.get("email"));
+			}
+		}
+		mv.addObject("member", member);
 		mv.setViewName("/main/home");
 		return mv;
 	}
