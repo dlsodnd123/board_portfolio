@@ -1,5 +1,7 @@
 package kr.spring.board_portfolio.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -99,6 +101,20 @@ public class MemberServiceImp implements MemberService {
 	@Override
 	public MemberVo getMember(String id) {
 		return memberDao.selectMember(id);
+	}
+
+	// 세션에 저장되어 있는 로그인되어 있는 멤버 정보 가져오기
+	@Override
+	public MemberVo getRequestMember(HttpServletRequest request) {
+		MemberVo member = (MemberVo)request.getSession().getAttribute("member");
+		return member;
+	}
+
+	// 닉네임 변경하기
+	@Override
+	public void nicknameChange(String mb_nickname, String mb_id) {
+		memberDao.updateNickname(mb_nickname, mb_id);
+		
 	}
 
 }

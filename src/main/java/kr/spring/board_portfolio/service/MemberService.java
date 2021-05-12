@@ -1,5 +1,7 @@
 package kr.spring.board_portfolio.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import kr.spring.board_portfolio.vo.MemberVo;
 
 public interface MemberService {
@@ -17,6 +19,10 @@ public interface MemberService {
 	MemberVo getMember(String id);
 	
 	void setKakaoMember(String string);
+
+	MemberVo getRequestMember(HttpServletRequest request);
+
+	void nicknameChange(String mb_nickname, String mb_id);
 
 
 }

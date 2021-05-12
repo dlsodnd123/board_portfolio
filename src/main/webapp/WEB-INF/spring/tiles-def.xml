@@ -8,6 +8,9 @@
 	<definition name="/main/join/signup" template="/WEB-INF/views/layout/unapplyLayout.jsp">      
    		<put-attribute name="body" value="/WEB-INF/views/main/join/signup.jsp" />
    </definition>
+   <definition name="/popup/change/nicknameChange" template="/WEB-INF/views/layout/unapplyLayout.jsp">      
+   		<put-attribute name="body" value="/WEB-INF/views/popup/change/nicknameChange.jsp" />
+   </definition>
 
     <!-- (2) 레이아웃을 적용하는 화면-->
     <definition name=".root" template="/WEB-INF/views/layout/applyLayout.jsp">

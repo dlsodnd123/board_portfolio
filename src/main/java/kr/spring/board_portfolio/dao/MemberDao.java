@@ -16,4 +16,6 @@ public interface MemberDao {
 
 	MemberVo selectMember(@Param("id")String id);
 
+	void updateNickname(@Param("mb_nickname")String mb_nickname, @Param("mb_id")String mb_id);
+
 }

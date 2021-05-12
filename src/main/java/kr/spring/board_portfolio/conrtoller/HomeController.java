@@ -111,4 +111,25 @@ public class HomeController {
 		mv.setViewName("redirect:/");
 		return mv;
 	}
+	
+	// 닉네임 변경 페이지 담당
+	@RequestMapping(value = "/popup/nickChange", method = RequestMethod.GET)
+	public ModelAndView popupNickChangeGet(ModelAndView mv) {
+		
+		mv.setViewName("/popup/change/nicknameChange");
+		return mv;
+	}
+	
+	// 닉네임 변경 담당
+	@RequestMapping(value = "/nickname/change", method = RequestMethod.POST)
+	@ResponseBody
+	public String nicknameChangePost(String mb_nickname, HttpServletRequest request) {
+		
+		// 세션에 저장되어 있는 회원정보 가져오기
+		MemberVo member = memberService.getRequestMember(request);
+		// 닉네임 변경하기
+		memberService.nicknameChange(mb_nickname, member.getMb_id());
+		return "success";
+	}
+
 }

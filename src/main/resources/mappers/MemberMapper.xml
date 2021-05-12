@@ -24,5 +24,9 @@
   <select id="selectMember" resultType="kr.spring.board_portfolio.vo.MemberVo">
   	select * from member where mb_id = #{id}
   </select>
+  
+  <update id="updateNickname">
+  	update member set mb_nickname = #{mb_nickname} where mb_id = #{mb_id}
+  </update>
 </mapper>
 
