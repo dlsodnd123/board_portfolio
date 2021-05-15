@@ -114,8 +114,11 @@ public class HomeController {
 	
 	// 닉네임 변경 페이지 담당
 	@RequestMapping(value = "/popup/nickChange", method = RequestMethod.GET)
-	public ModelAndView popupNickChangeGet(ModelAndView mv) {
+	public ModelAndView popupNickChangeGet(ModelAndView mv, HttpServletRequest request) {
+		// 세션에 저장되어 있는 회원정보 가져오기
+		MemberVo member = memberService.getRequestMember(request);
 		
+		mv.addObject("member", member);
 		mv.setViewName("/popup/change/nicknameChange");
 		return mv;
 	}

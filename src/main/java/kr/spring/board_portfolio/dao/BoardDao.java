@@ -20,7 +20,7 @@ public interface BoardDao {
 
 	void delBoard(@Param("bo_num")int bo_num);
 
-	int selectBoardCount();
+	int selectBoardCount(@Param("cri")Criteria cri);
 
 	void insertComment(@Param("comment")CommentVo comment);
 

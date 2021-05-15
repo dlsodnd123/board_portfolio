@@ -28,7 +28,7 @@
 	</select>
 	
 	<select id="selectBoard" resultType="kr.spring.board_portfolio.vo.BoardVo">
-		select * from board where bo_num = #{bo_num}
+		select * from board where bo_num = #{bo_num} and bo_isDel = 'N'
 	</select>
 	
 	<update id="updateBoard">
@@ -41,6 +41,20 @@
 	
 	<select id="selectBoardCount" resultType="int">
 		select count(*) from board where bo_isDel = 'N'
+		<if test="cri.type == 1">
+			and (bo_title like concat('%',#{cri.search},'%')
+			or bo_content like concat('%',#{cri.search},'%')
+			or bo_mb_nickname like concat('%',#{cri.search},'%'))
+		</if>
+		<if test="cri.type == 2">
+			and bo_title like concat('%',#{cri.search},'%')
+		</if>
+		<if test="cri.type == 3">
+			and bo_content like concat('%',#{cri.search},'%')
+		</if>
+		<if test="cri.type == 4">
+			and bo_mb_nickname like concat('%',#{cri.search},'%')
+		</if>
 	</select>
 	
 	<insert id="insertComment" useGeneratedKeys="true" keyProperty="comment.com_num">

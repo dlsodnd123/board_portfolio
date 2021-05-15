@@ -18,7 +18,7 @@ public interface BoardService {
 
 	void delBoard(int bo_num);
 
-	int getBoardCount();
+	int getBoardCount(Criteria cri);
 
 	void setComment(CommentVo comment);
 

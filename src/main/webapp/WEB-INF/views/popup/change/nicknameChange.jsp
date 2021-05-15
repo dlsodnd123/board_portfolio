@@ -31,7 +31,7 @@
 	<div class="container">
 		<h5 class="nickname-main-title"><i class="fas fa-pencil-alt"></i> 닉네임 변경</h5>
 		<div class="nickChange-input-box">
-			<input type="text" class="form-control" id="mb_nickname" placeholder="1~15글자, 특수문자 불가능"  maxlength="15" name="mb_nickname">
+			<input type="text" class="form-control" id="mb_nickname" placeholder="1~15글자로 입력"  maxlength="15" name="mb_nickname" value="${member.mb_nickname}">
 		    <button type="button" class="btn btn-primary nickname-Check-btn">중복검사</button>
 	    </div>
 	    <label for="mb_nickname" class="error" id="mb_nickname"></label>

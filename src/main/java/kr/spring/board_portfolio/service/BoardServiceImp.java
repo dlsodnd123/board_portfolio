@@ -48,8 +48,8 @@ public class BoardServiceImp implements BoardService{
 
 	// 게시글의 총개수 가져오기
 	@Override
-	public int getBoardCount() {
-		return boardDao.selectBoardCount();
+	public int getBoardCount(Criteria cri) {
+		return boardDao.selectBoardCount(cri);
 	}
 
 	// 댓글 등록하기
@@ -59,7 +59,6 @@ public class BoardServiceImp implements BoardService{
 		// 댓글 등록 후 댓글 갯수 증가시켜주기
 		int cnt = 1;
 		boardDao.updateCommentCnt(cnt, comment.getCom_bo_num());
-		System.out.println(comment);
 	}
 
 	// 댓글 목록 가져오기

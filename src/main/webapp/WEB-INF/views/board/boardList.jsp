@@ -64,10 +64,10 @@
 	  		<form action="<%=request.getContextPath()%>/board/list" method="get" id="searchForm">
 		  		<div class="search-box">
 			  		<select class="boardList-type" name="type">
-			  			<option value="1">전체</option>
-			  			<option value="2">제목</option>
-			  			<option value="3">내용</option>
-			  			<option value="4">작성자</option>
+			  			<option value="1"<c:if test="${pageMaker.criteria.type == 1}">selected</c:if>>전체</option>
+			  			<option value="2"<c:if test="${pageMaker.criteria.type == 2}">selected</c:if>>제목</option>
+			  			<option value="3"<c:if test="${pageMaker.criteria.type == 3}">selected</c:if>>내용</option>
+			  			<option value="4"<c:if test="${pageMaker.criteria.type == 4}">selected</c:if>>작성자</option>
 			  		</select>
 			  		<input type="text" class="boardList-search" name="search" value="${pageMaker.criteria.search}">
 		  		</div>

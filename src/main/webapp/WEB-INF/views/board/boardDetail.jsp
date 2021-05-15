@@ -116,7 +116,7 @@
 </style>
 </head>
 <body>
-	<div class="container col-10 boardDetail-box">		
+	<div class="container col-10 boardDetail-box">
 		<table class="table">
 			<thead>
 				<tr>
@@ -133,6 +133,7 @@
 		</table>
 		<textarea rows="13" id="bo_content" class="bo_content" readonly>${board.bo_content}</textarea>
 		<div class="boardDetail-comment-box">
+			<h6><b>댓글</b></h6>
 			<c:forEach items="${commentList}" var="comment">
 				<div class="comment-info-box">
 					<div class="comment-wirter">${comment.com_mb_nickname}</div>
@@ -217,8 +218,7 @@
 			dataType:"json",
 			url : '<%=request.getContextPath()%>/comment/register',
 	        contentType:"application/json; charset=UTF-8",
-			success : function(data){
-				
+			success : function(data){				
 				$('.commentReg-content').val('');
 				var str = '';
 				str += '<div class="comment-info-box">'
@@ -238,7 +238,7 @@
 				str += '</div>'
 				str += '<input type="hidden" name="com_num" value="' + data.newComment.com_num + '">'
 				str += '</div>'
-				$('.comment-info-box').last().after(str);
+				$('.boardDetail-commentReg-box').before(str);
 				eventCommentModifyBtnClick($('.comment-modify-btn'));
 				eventCommentDelBtnClick($('.comment-del-btn'));
 				

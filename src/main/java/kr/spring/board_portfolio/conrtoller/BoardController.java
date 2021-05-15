@@ -28,7 +28,7 @@ public class BoardController {
 	public ModelAndView boardListGet(ModelAndView mv, Criteria cri) {
 		// 게시글목록 가져오기
 		ArrayList<BoardVo> boardList = boardService.getBoardList(cri);		
-		int totalCount = boardService.getBoardCount();
+		int totalCount = boardService.getBoardCount(cri);
 		int displayPageNum = 3;
 		PageMaker pageMaker = new PageMaker(cri, displayPageNum, totalCount);
 				
