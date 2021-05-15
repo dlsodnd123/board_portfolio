@@ -30,21 +30,30 @@
 </style>
 </head>
 <body>
-	<div class="container col-4">
-  		<h3 class="login-title"><i class="fas fa-sign-in-alt"></i> 로그인</h3>
-  		<form action="<%=request.getContextPath()%>/login" method="post" id="form">
-   			<div class="form-group">
-      			<input type="text" class="form-control" id="mb_id" name="mb_id" placeholder="아이디">
-   		 	</div>
-    		<div class="form-group">
-      			<input type="password" class="form-control" id="mb_pw" name="mb_pw" placeholder="비밀번호">
-    		</div>
-    		<div class="login-btn-box">
-	    		<button type="submit" class="btn btn-primary login-btn">로그인</button>
-	    		<a href="https://kauth.kakao.com/oauth/authorize?client_id=46135f3668cd3705d613d5207f15d428&redirect_uri=http://192.168.0.7:8080/board_portfolio/&response_type=code"><img class="kakao-login-btn" src="<%=request.getContextPath()%>/resources/img/kakao_login_medium_wide.png"></a>
-	    	</div>
-  		</form>
-	</div>	
+	<c:if test="${member == null}">
+		<div class="container col-4">
+	  		<h3 class="login-title"><i class="fas fa-sign-in-alt"></i> 로그인</h3>
+	  		<form action="<%=request.getContextPath()%>/login" method="post" id="form">
+	   			<div class="form-group">
+	      			<input type="text" class="form-control" id="mb_id" name="mb_id" placeholder="아이디">
+	   		 	</div>
+	    		<div class="form-group">
+	      			<input type="password" class="form-control" id="mb_pw" name="mb_pw" placeholder="비밀번호">
+	    		</div>
+	    		<div class="login-btn-box">
+		    		<button type="submit" class="btn btn-primary login-btn">로그인</button>
+		    		<a href="https://kauth.kakao.com/oauth/authorize?client_id=46135f3668cd3705d613d5207f15d428&redirect_uri=http://192.168.0.7:8080/board_portfolio/&response_type=code"><img class="kakao-login-btn" src="<%=request.getContextPath()%>/resources/img/kakao_login_medium_wide.png"></a>
+		    	</div>
+	  		</form>
+		</div>
+	</c:if>
+	<c:if test="${member != null }">
+		<div class="container col-6">
+			<br> <br> 
+			<h3><i class="fas fa-exclamation-triangle"> </i> 이미 로그인 되어 있습니다.</h3> <br>
+			<a href="<%=request.getContextPath()%>/"><button type="button" class="btn btn-secondary">메인홈으로</button></a>
+		</div>
+	</c:if>
 </body>
 <script type="text/javascript">
 	$('#form').submit(function(){

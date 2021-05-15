@@ -34,43 +34,52 @@
 </style>
 </head>
 <body>
-	<div class="container col-6">
-	  	<h3 class="signup-title"><i class="fas fa-user-plus"></i> 간편회원가입</h3>
-	  	<form action="<%=request.getContextPath()%>/signup" method="post" id="form">
-	    	<div class="form-group">
-	      		<label for="mb_id">아이디(필수)</label>
-	      		<input type="text" class="form-control" id="mb_id" placeholder="2~15글자, 영문(소)/숫자만 가능" maxlength="15" name="mb_id">
-	      		<button type="button" class="btn btn-primary id-Check-btn">중복검사</button>      		
-	    	</div>
-	    	<label for="mb_id" class="error" id="mb_id"></label>
-	    	<div class="form-group">
-	      		<label for="mb_pw">비밀번호(필수)</label>
-	      		<input type="password" class="form-control" id="mb_pw" placeholder="8글자 이상, 영문(대,소)/숫자만가능" name="mb_pw">
-	    	</div>
-	    	<label for="mb_pw" class="error" id="mb_pw"></label>
-	    	<div class="form-group">
-	      		<label for="mb_pw2">비밀번호(필수)</label>
-	      		<input type="password" class="form-control" id="mb_pw2" name="mb_pw2">
-	    	</div>
-	    	<label for="mb_pw2" class="error" id="mb_pw2"></label>
-	    	<div class="form-group">
-	      		<label for="mb_nickname">닉네임(필수)</label>
-	      		<input type="text" class="form-control" id="mb_nickname" placeholder="1~15글자, 특수문자제외 하고 사용가능"  maxlength="15" name="mb_nickname">
-	      		<button type="button" class="btn btn-primary nickname-Check-btn">중복검사</button>      		
-	    	</div>
-	    	<label for="mb_nickname" class="error" id="mb_nickname"></label>
-	    	<div class="form-group">
-	      		<label for="mb_email">이메일(선택)</label>
-	      		<input type="text" class="form-control" id="mb_email" placeholder="ex)board@board.com" name="mb_email">	      		
-	    	</div>
-	    	<label for="mb_email" class="error" id="mb_email"></label>
-	    	<input type="hidden" name="mb_division" value="normal">
-	    	<div>   	
-		    	<button type="submit" class="btn btn-primary signup-btn">가입</button>
-		    	<a href="<%=request.getContextPath()%>/"><button type="button" class="btn btn-secondary signup-cancel-btn">취소</button></a>
-	    	</div>
-	  	</form>
-	</div>
+	<c:if test="${member == null}">
+		<div class="container col-6">
+		  	<h3 class="signup-title"><i class="fas fa-user-plus"></i> 간편회원가입</h3>
+		  	<form action="<%=request.getContextPath()%>/signup" method="post" id="form">
+		    	<div class="form-group">
+		    		<label for="mb_id" class="error"></label>	    		
+		      		<label for="mb_id">아이디(필수)</label>
+		      		<input type="text" class="form-control" id="mb_id" placeholder="2~15글자, 영문(소)/숫자만 가능" maxlength="15" name="mb_id">
+		      		<button type="button" class="btn btn-primary id-Check-btn">중복검사</button>      		
+		    	</div>
+		    	<div class="form-group">
+		    		<label for="mb_pw" class="error"></label>
+		      		<label for="mb_pw">비밀번호(필수)</label>
+		      		<input type="password" class="form-control" id="mb_pw" placeholder="8글자 이상, 영문(대,소)/숫자만가능" name="mb_pw">
+		    	</div>	    	
+		    	<div class="form-group">
+		    		<label for="mb_pw2" class="error"></label>
+		      		<label for="mb_pw2">비밀번호(필수)</label>
+		      		<input type="password" class="form-control" id="mb_pw2" name="mb_pw2">
+		    	</div>	    	
+		    	<div class="form-group">
+		    		<label for="mb_nickname" class="error"></label>
+		      		<label for="mb_nickname">닉네임(필수)</label>
+		      		<input type="text" class="form-control" id="mb_nickname" placeholder="1~15글자, 특수문자제외 하고 사용가능"  maxlength="15" name="mb_nickname">
+		      		<button type="button" class="btn btn-primary nickname-Check-btn">중복검사</button>      		
+		    	</div>	    	
+		    	<div class="form-group">
+		    		<label for="mb_email" class="error"></label>
+		      		<label for="mb_email">이메일(선택)</label>
+		      		<input type="text" class="form-control" id="mb_email" placeholder="ex)board@board.com" name="mb_email">	      		
+		    	</div>	    	
+		    	<input type="hidden" name="mb_division" value="normal">
+		    	<div>   	
+			    	<button type="submit" class="btn btn-primary signup-btn">가입</button>
+			    	<a href="<%=request.getContextPath()%>/"><button type="button" class="btn btn-secondary signup-cancel-btn">취소</button></a>
+		    	</div>
+		  	</form>
+		</div>
+	</c:if>
+	<c:if test="${member != null }">
+		<div class="container col-6">
+			<br> <br> 
+			<h3><i class="fas fa-exclamation-triangle"> </i> 잘못된 접근 방식입니다.</h3> <br>
+			<a href="<%=request.getContextPath()%>/"><button type="button" class="btn btn-secondary">메인홈으로</button></a>
+		</div>
+	</c:if>
 </body>
 <script type="text/javascript">
 	var idCheck = false;
@@ -165,7 +174,6 @@
 			},
 			mb_nickname : {
 				required : true,
-				regex : /^[0-9a-zA-Zㄱ-힣]{1,15}$/
 			},
 			mb_email : {
 				email : true
@@ -186,7 +194,6 @@
 			},
 			mb_nickname : {
 				required :'필수 입력 사항입니다.',
-				regex : '1~15글자, 특수문자제외 하고 사용 가능합니다.'
 			},
 			mb_email : {
 				email : '이메일 형식이 맞지 않습니다.'
