@@ -29,7 +29,7 @@ public class BoardController {
 		// 게시글목록 가져오기
 		ArrayList<BoardVo> boardList = boardService.getBoardList(cri);		
 		int totalCount = boardService.getBoardCount(cri);
-		int displayPageNum = 3;
+		int displayPageNum = 10;
 		PageMaker pageMaker = new PageMaker(cri, displayPageNum, totalCount);
 				
 		mv.addObject("pageMaker", pageMaker);
