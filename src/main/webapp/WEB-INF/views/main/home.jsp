@@ -22,9 +22,6 @@
 		.Development-title{
 			width: 25%;
 		}
-		.Development-content{
-			vertical-align: top;
-		}
 		.Development-img-box{
 			margin: 12px 0 20px 0;
 		}
