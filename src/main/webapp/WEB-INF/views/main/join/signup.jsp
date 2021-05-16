@@ -57,7 +57,7 @@
 		    	<div class="form-group">
 		    		<label for="mb_nickname" class="error"></label>
 		      		<label for="mb_nickname">닉네임(필수)</label>
-		      		<input type="text" class="form-control" id="mb_nickname" placeholder="1~15글자, 특수문자제외 하고 사용가능"  maxlength="15" name="mb_nickname">
+		      		<input type="text" class="form-control" id="mb_nickname" placeholder="1~15글자로 입력"  maxlength="15" name="mb_nickname">
 		      		<button type="button" class="btn btn-primary nickname-Check-btn">중복검사</button>      		
 		    	</div>	    	
 		    	<div class="form-group">
