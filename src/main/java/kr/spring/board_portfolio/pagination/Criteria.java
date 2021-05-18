@@ -7,6 +7,7 @@ public class Criteria {
 	private int perPageNum;
 	private String search;
 	private int type;
+	private String order;
 	//Criteria 디폴트 생성자 : 현재 페이지를 1페이지로, 한 페이지에 10개의 컨텐츠
 	public Criteria() {
 		this.page = 1;
@@ -17,6 +18,14 @@ public class Criteria {
 	public int getPage() {
 		return page;
 	}
+	public String getOrder() {
+		return order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
+	}
+
 	public String getSearch() {
 		return search;
 	}

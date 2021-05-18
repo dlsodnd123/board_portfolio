@@ -35,7 +35,6 @@
 	}
 	.boardList-searchSoft-box .search-box{
 		border: 1px solid black;
-		width: 30%;
 		display: inline-block;
 		vertical-align: middle;
 	}
@@ -53,6 +52,29 @@
 	.boardList-searchSoft-box .boardList-search-btn{
 		padding: 4px 12px;
 		border: 1px solid black;
+	}
+	.boardList-sort-box{
+		float: right;
+		margin-bottom: 5px;
+		font-size: 14px;
+	}
+	#searchForm{
+		margin: 0;
+	}
+	.boardList-sort-box>a:first-child{
+		margin-right: 4px;
+		padding-right: 4px;
+		border-right: 1px solid #dee2e6;
+	}
+	.boardList-sort-box>a:hover {
+		text-decoration: none;
+	}
+	.boardList-sort-box>a{
+		color: black;
+	}
+	.boardList-sort-box .select{
+		font-weight: 700;
+		color: red;
 	}
 </style>
 </head>
@@ -73,7 +95,11 @@
 		  		</div>
 			  	<button type="submit" class="btn btn-light boardList-search-btn">검색</button>
 		  	</form>
-	  	</div>	  	
+		  	<div class="boardList-sort-box">
+		  		<a href="<%=request.getContextPath()%>/board/list/?order=new&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}" class=<c:if test="${pageMaker.criteria.order == 'new' }">"select"</c:if>>최신순</a>
+		  		<a href="<%=request.getContextPath()%>/board/list/?order=highView&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}" class=<c:if test="${pageMaker.criteria.order == 'highView' }">"select"</c:if>>조회수↑</a>
+		  	</div>	  	
+	  	</div>
 	  	<table class="table">
 	    	<thead>
 	      		<tr>
@@ -98,13 +124,13 @@
 	  	</table>
 	  	<ul class="pagination justify-content-center">
 	  		<c:if test="${pageMaker.prev}">
-		    	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.startPage - 1}&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}">이전</a></li>
+		    	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.startPage - 1}&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}&order=${pageMaker.criteria.order}">이전</a></li>
 		    </c:if>
 		    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="index">		    	
-		    	<li class="page-item <c:if test="${pageMaker.criteria.page == index}">active</c:if>"><a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${index}&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}">${index}</a></li>		    	
+		    	<li class="page-item <c:if test="${pageMaker.criteria.page == index}">active</c:if>"><a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${index}&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}&order=${pageMaker.criteria.order}">${index}</a></li>		    	
 		    </c:forEach>
 		    <c:if test="${pageMaker.next}">
-		    	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.endPage + 1}&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}">다음</a></li>
+		    	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.endPage + 1}&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}&order=${pageMaker.criteria.order}">다음</a></li>
 		    </c:if>
 		  </ul>
 	  	<div class="boardList-btn-box">

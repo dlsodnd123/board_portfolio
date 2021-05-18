@@ -24,7 +24,13 @@
 			<if test="cri.type == 4">
 				and bo_mb_nickname like concat('%',#{cri.search},'%')
 			</if>
-			order by bo_num desc limit #{cri.pageStart}, #{cri.perPageNum}
+			<if test="cri.order == 'new'">
+				order by bo_num desc 
+			</if>
+			<if test="cri.order == 'highView'">
+				order by bo_view desc
+			</if>
+			limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	
 	<select id="selectBoard" resultType="kr.spring.board_portfolio.vo.BoardVo">
