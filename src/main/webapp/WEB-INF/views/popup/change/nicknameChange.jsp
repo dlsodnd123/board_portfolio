@@ -83,7 +83,8 @@
     		data: data,
     		url: '<%=request.getContextPath()%>/nickname/change',
     		success: function(data){
-    			alert('닉네임이 변경 되었습니다.')
+    			alert('닉네임이 변경 되었습니다. 다시 로그인이 필요합니다.');
+    			location.href = '<%=request.getContextPath()%>/logout'
     			close();
     		},
     		error: function(error) {
